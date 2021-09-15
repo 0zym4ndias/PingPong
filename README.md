@@ -1,2 +1,2 @@
 # PingPong
-Juego de ping pong retro desarrollado en Python | The classic retro game ping pong developed in Python
+El clásico juego retro Ping Pong desarrollado en Python | The classic retro game Ping Pong developed in Python
