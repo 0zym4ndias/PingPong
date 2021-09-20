@@ -3,7 +3,7 @@
 #	Juego retro de ping pong 
 #	Programmer: Roberto A. Pérez Iga | @0zym4ndias
 #	Fecha: 12 de Septiembre 2021
-#   I took inspiration from another program made by @TokyoEdTech 
+#   	I took inspiration from another program made by @TokyoEdTech 
 #
 #
 
