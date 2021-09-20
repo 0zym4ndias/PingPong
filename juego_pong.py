@@ -3,6 +3,7 @@
 #	Juego retro de ping pong 
 #	Programmer: Roberto A. Pérez Iga | @0zym4ndias
 #	Fecha: 12 de Septiembre 2021
+#   I took inspiration from another program made by @TokyoEdTech 
 #
 #
 
@@ -14,7 +15,6 @@ window.title("Pong game by @0zym4ndias") #  Game title
 window.bgcolor("grey12") #  Background color 
 window.setup(width = 800, height = 600)
 window.tracer(0) #  It stops the window for updating, so that the game runs smoother
-
 
 #  Right paddle
 right_paddle = turtle.Turtle()
@@ -43,6 +43,19 @@ ball.penup()
 ball.goto(0, 0) #  The initial position of the paddle
 ball.dx = 0.1 #  The ball moves by two pixels
 ball.dy = 0.1 #  The ball moves by two pixels
+
+#  Score 
+score_a = 0
+score_b = 0
+
+#  Score_pen
+score_pen = turtle.Turtle()
+score_pen.speed(0) #  Animation speed
+score_pen.color("white")
+score_pen.penup() #  This is used to avoid drawing lines when it moves
+score_pen.hideturtle() 
+score_pen.goto(0, 250) #  Where the score is located 
+score_pen.write("Player A: 0  |  Player B: 0", align = "center", font=("Lao MN", 24, "normal")) 
 
 #  Function
 def left_paddle_up():
@@ -95,14 +108,30 @@ while True:
 	#  Put the ball back on the center if it goes out 
 	if ball.xcor() > 390:
 		ball.goto(0, 0) #  Put ball back to the center
-		ball.dx *= -1 #  It will reverse the direction of the ball 
+		ball.dx *= -1 #  It will reverse the direction of the ball
+		score_a += 1
+		score_pen.clear() #  This is to update the score correctly 
+		score_pen.write("Player A: {}  |  Player B: {}".format(score_a, score_b), align = "center", font=("Lao MN", 24, "normal")) 
 
 	if ball.xcor() < -390:
 		ball.goto(0, 0) #  Put ball back to the center
 		ball.dx *= -1 #  It will reverse the direction of the ball 
+		score_b += 1
+		score_pen.clear() #  This is to update the score correctly 
+		score_pen.write("Player A: {}  |  Player B: {}".format(score_a, score_b), align = "center", font=("Lao MN", 24, "normal")) 
 
 	#  Collisons 
-	#if ball.xcor() > 340 and (ball.ycor() < right_paddle)
+	#  This will make the ball bounce with the right paddle 
+	if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < right_paddle.ycor() + 40 and ball.ycor() > right_paddle.ycor() - 40):
+		ball.setx(340) #  The ball will move to the left (just a little) so that the ball doesn´t stuck on the back of the paddle 
+		ball.dx *= -1 #  dx is positive and will bounce and go the other way (it will reverse the direction)
+
+	#  This will make the ball bounce with the left paddle 
+	if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < left_paddle.ycor() + 40 and ball.ycor() > left_paddle.ycor() - 40):
+		ball.setx(-340) #  The ball will move to the left (just a little) so that the ball doesn´t stuck on the back of the paddle 
+		ball.dx *= -1 #  dx is positive and will bounce and go the other way (it will reverse the direction)
+
+
 
 
 
